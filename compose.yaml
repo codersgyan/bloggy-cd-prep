@@ -29,7 +29,7 @@ services:
     networks:
       - blog-app-net
   blog-server:
-    image: codersgyan/advance-ai-agent:build-d0a7915e27550f86aba8f9e302ae9932bc339d1d
+    image: codersgyan/advance-ai-agent:build-62934182c9a7bba349b16551cb3fd7a9d5e87eee
     deploy:
       replicas: 1
       update_config:
