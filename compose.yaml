@@ -25,7 +25,7 @@ services:
             - blog-app-net
 
     blog-server:
-        image: 'codersgyan/blog-app:v1'
+        image: 'advance-ai-agent:v1'
         deploy:
             replicas: 1
             update_config:
