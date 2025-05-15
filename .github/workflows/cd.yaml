@@ -26,6 +26,8 @@ jobs:
     deploy-swarm:
       name: Deploy the new version to docker deploy-swarm
       runs-on: ubuntu-latest
+      needs:
+        - build-image
       steps:
         - name: SSH and update service
           uses: appleboy/ssh-action@v1
