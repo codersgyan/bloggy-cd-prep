@@ -41,7 +41,7 @@ jobs:
                   echo "=== root files ==="
                   ls -1
                   echo "=== looking for your new text ==="
-                  grep -R "That exact string you changed" -n .
+                  grep -R "Articles and posts" -n .
             - name: Build Docker image
               run: docker build -t ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} --no-cache --platform linux/amd64 .
             - name: Push Docker image to Docker Hub
