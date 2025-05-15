@@ -77,7 +77,7 @@ jobs:
                       git fetch origin main
                       git checkout origin/main -- compose.yaml
 
-                      docker pull ${{env.IMAGE_NAME}}:build-${{env.IMAGE_TAG}}
+                      docker pull ${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}}
 
                       # 4. Deploy (or update) the stack
                       docker stack deploy -c compose.yaml bloggy_app
