@@ -11,7 +11,7 @@ jobs:
             contents: write
         env:
             IMAGE_NAME: codersgyan/advance-ai-agent
-            IMAGE_TAG: ${{ github.sha }} # .run_number
+            IMAGE_TAG: ${{ github.run_number }} # .run_number
         steps:
             - name: Checkout repository
               uses: actions/checkout@v3
@@ -52,7 +52,7 @@ jobs:
         runs-on: ubuntu-latest
         env:
             IMAGE_NAME: codersgyan/advance-ai-agent
-            IMAGE_TAG: ${{ github.sha }} # .run_numbersh
+            IMAGE_TAG: ${{ github.run_number }} # .run_number
         needs:
             - build-image
         steps:
