@@ -10,10 +10,6 @@ jobs:
         env:
           IMAGE_NAME: codersgyan/advance-ai-agent
           IMAGE_TAG: build-${{ github.sha }} # .run_number
-        needs:
-          - lint
-          - test
-          - build
         steps:
             - name: Checkout repository
               uses: actions/checkout@v3
