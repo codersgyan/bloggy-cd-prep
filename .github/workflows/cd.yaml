@@ -75,7 +75,7 @@ jobs:
 
                       # 2. Pull latest compose.yaml from Git
                       git fetch origin main
-                      git checkout origin/main -- compose.yaml
+                      git checkout main -- compose.yaml
 
                       docker pull $IMAGE_NAME:$IMAGE_TAG
 
