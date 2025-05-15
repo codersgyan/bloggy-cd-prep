@@ -11,7 +11,7 @@ jobs:
             contents: write
         env:
             IMAGE_NAME: codersgyan/advance-ai-agent
-            IMAGE_TAG: build-${{ github.run_number }} # .run_number
+            IMAGE_TAG: ${{ github.sha }} # .run_number
         steps:
             - name: Checkout repository
               uses: actions/checkout@v3
@@ -43,7 +43,7 @@ jobs:
                   echo "=== looking for your new text ==="
                   grep -R "Articles and posts" -n .
             - name: Build Docker image
-              run: docker build -t ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} --no-cache --platform linux/amd64 .
+              run: docker build -t ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} -t ${{env.IMAGE_NAME}}:latest --no-cache --platform linux/amd64 .
             - name: Push Docker image to Docker Hub
               run: docker push ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
 
@@ -52,7 +52,7 @@ jobs:
         runs-on: ubuntu-latest
         env:
             IMAGE_NAME: codersgyan/advance-ai-agent
-            IMAGE_TAG: build-${{ github.run_number }} # .run_number
+            IMAGE_TAG: ${{ github.sha }} # .run_numbersh
         needs:
             - build-image
         steps:
@@ -77,7 +77,7 @@ jobs:
                       git fetch origin main
                       git checkout origin/main -- compose.yaml
 
-                      docker pull ${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}}
+                      # docker pull ${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}}
 
                       # 4. Deploy (or update) the stack
                       docker stack deploy -c compose.yaml bloggy_app
