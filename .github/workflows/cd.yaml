@@ -11,7 +11,7 @@ jobs:
             contents: write
         env:
             IMAGE_NAME: codersgyan/advance-ai-agent
-            IMAGE_TAG: build-${{ github.sha }} # .run_number
+            IMAGE_TAG: build-${{ github.run_number }} # .run_number
         steps:
             - name: Checkout repository
               uses: actions/checkout@v3
@@ -52,7 +52,7 @@ jobs:
         runs-on: ubuntu-latest
         env:
             IMAGE_NAME: codersgyan/advance-ai-agent
-            IMAGE_TAG: build-${{ github.sha }} # .run_number
+            IMAGE_TAG: build-${{ github.run_number }} # .run_number
         needs:
             - build-image
         steps:
@@ -75,7 +75,7 @@ jobs:
 
                       # 2. Pull latest compose.yaml from Git
                       git fetch origin main
-                      git checkout main -- compose.yaml
+                      git checkout origin/main -- compose.yaml
 
                       docker pull $IMAGE_NAME:$IMAGE_TAG
 
