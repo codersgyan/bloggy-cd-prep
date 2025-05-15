@@ -34,18 +34,18 @@ jobs:
             username: ${{ secrets.SWARM_USER }}
             key: ${{ secrets.SWARM_SSH_KEY }}
             port: ${{ secrets.SWARM_SSH_PORT }}
-          run: |
-            set -e
+            script: |
+              set -e
 
-            # 1. Go to your app directory (where compose.yaml lives)
-            cd ~/bloggy
+              # 1. Go to your app directory (where compose.yaml lives)
+              cd ~/bloggy
 
-            # 2. Pull latest compose.yaml from Git
-            git fetch origin main
-            git checkout origin/main -- compose.yaml
+              # 2. Pull latest compose.yaml from Git
+              git fetch origin main
+              git checkout origin/main -- compose.yaml
 
-            # 3. Update the image tag in compose.yaml
-            sed -i "s|\(image: codersgyan/advance-ai-agent:\).*|\1${{ github.sha }}|" compose.yaml
+              # 3. Update the image tag in compose.yaml
+              sed -i "s|\(image: codersgyan/advance-ai-agent:\).*|\1${{ github.sha }}|" compose.yaml
 
-            # 4. Deploy (or update) the stack
-            docker stack deploy -c compose.yaml bloggy_app
+              # 4. Deploy (or update) the stack
+              docker stack deploy -c compose.yaml bloggy_app
