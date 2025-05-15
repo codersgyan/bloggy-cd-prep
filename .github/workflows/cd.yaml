@@ -42,6 +42,10 @@ jobs:
               # 1. Go to your app directory (where compose.yaml lives)
               cd ~/bloggy
 
+              # start an agent and load the host’s own key
+              eval "$(ssh-agent -s)"
+              ssh-add ~/.ssh/id_ed25519
+
               # 2. Pull latest compose.yaml from Git
               git fetch origin main
               git checkout origin/main -- compose.yaml
