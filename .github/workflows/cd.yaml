@@ -34,20 +34,18 @@ jobs:
       steps:
         - name: Checkout repository
           uses: actions/checkout@v3
+          with:
+            persist-credentials: true
         - name: Update compose.yml
           uses: fjogeleit/yaml-update-action@v0.16.0
           with:
             valueFile: compose.yaml
             propertyPath: 'services["blog-server"].image'
             value: ${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}}
-            commitChange: false
-        - name: Commit desired state
-          run: |
-            git config user.name github-actions
-            git config user.email github-actions@github.com
-            git add .
-            git commit -m "docker image version bump to ${{env.IMAGE_TAG}}"
-            git push
+            updateFile:   true
+            commitChange: true
+            commitUserName:  github-actions[bot]
+            commitUserEmail: github-actions[bot]@users.noreply.github.com
         - name: SSH and update service
           uses: appleboy/ssh-action@v1
           with:
