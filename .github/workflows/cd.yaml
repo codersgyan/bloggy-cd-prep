@@ -1,4 +1,4 @@
-name: Blogyy app
+name: Blogyy app CD
 
 on:
     push:
