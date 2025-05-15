@@ -1,0 +1,28 @@
+name: Blogyy app
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+    build-image:
+        runs-on: ubuntu-latest
+        env:
+          IMAGE_NAME: codersgyan/advance-ai-agent
+          IMAGE_TAG: build-${{ github.sha }} # .run_number
+        needs:
+          - lint
+          - test
+          - build
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v3
+            - name: Log in to Docker Hub
+              uses: docker/login-action@v1
+              with:
+                  username: ${{ secrets.DOCKERHUB_USERNAME }}
+                  password: ${{ secrets.DOCKERHUB_PASSWORD }}
+            - name: Build Docker image
+              run: docker build -t ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} --platform linux/amd64 .
+            - name: Push Docker image to Docker Hub
+              run: docker push ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
