@@ -50,8 +50,7 @@ jobs:
               git fetch origin main
               git checkout origin/main -- compose.yaml
 
-              # 3. Update the image tag in compose.yaml
-              sed -i "s|\(image: codersgyan/advance-ai-agent:\).*|\1${{ github.sha }}|" compose.yaml
+              sed -i -E 's|^(\s*image:\s*).*$|\1codersgyan/advance-ai-agent:'${{ github.sha }}'|' compose.yaml
 
               # 4. Deploy (or update) the stack
               docker stack deploy -c compose.yaml bloggy_app
