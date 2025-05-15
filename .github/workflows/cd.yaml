@@ -36,6 +36,12 @@ jobs:
               with:
                   username: ${{ secrets.DOCKERHUB_USERNAME }}
                   password: ${{ secrets.DOCKERHUB_PASSWORD }}
+            - name: Sanity-check workspace
+              run: |
+                  echo "=== root files ==="
+                  ls -1
+                  echo "=== looking for your new text ==="
+                  grep -R "That exact string you changed" -n .
             - name: Build Docker image
               run: docker build -t ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} --no-cache --platform linux/amd64 .
             - name: Push Docker image to Docker Hub
