@@ -37,14 +37,14 @@ jobs:
           with:
             valueFile: compose.yaml
             propertyPath: 'services["blog-server"].image'
-            value: ${{env.IMAGE_NAME}}:${{IMAGE_TAG}}
+            value: ${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}}
             commitChange: false
         - name: Commit desired state
           run: |
             git config user.name github-actions
             git config user.email github-actions@github.com
             git add .
-            git commit -m "docker image version bump to ${{IMAGE_TAG}}"
+            git commit -m "docker image version bump to ${{env.IMAGE_TAG}}"
             git push
         - name: SSH and update service
           uses: appleboy/ssh-action@v1
