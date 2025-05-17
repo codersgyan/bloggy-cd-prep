@@ -29,9 +29,15 @@ services:
     networks:
       - blog-app-net
   blog-server:
+<<<<<<< HEAD
     image: codersgyan/blog-app:build-4
     deploy:
       replicas: 2
+=======
+    image: codersgyan/advance-ai-agent:build-8f4e17ac53dd4214ac0b3b231fdb5a40a3c8b688
+    deploy:
+      replicas: 1
+>>>>>>> 7fb8582a11387c3e63f2d5604fd206b7fe3f7d0e
       update_config:
         order: start-first
         failure_action: rollback
