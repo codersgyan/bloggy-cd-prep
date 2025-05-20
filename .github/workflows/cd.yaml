@@ -32,9 +32,9 @@ jobs:
                   private_key: ${{ secrets.APPLICATION_PRIVATE_KEY }}
             - name: Commit files
               run: |
-                  git config --local user.email "test@test.com"
-                  git config --local user.name "Test"
-                  git commit -a -m "bump aAdd changes [skip ci]"
+                  git config --local user.email "bot@github.com"
+                  git config --local user.name "bot"
+                  git commit -a -m "Bump the image version [skip ci]"
             - name: Push changes
               uses: ad-m/github-push-action@master
               env:
