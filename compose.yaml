@@ -60,6 +60,8 @@ services:
             - NODE_HOST="{{.Node.Hostname}}"
         networks:
             - blog-app-net
+        secrets:
+            - my_db_password
 volumes:
     blog-db-vol: null
 networks:
