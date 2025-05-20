@@ -31,8 +31,6 @@ jobs:
                   application_id: ${{ secrets.APPLICATION_ID }}
                   application_private_key: ${{ secrets.APPLICATION_PRIVATE_KEY }}
             - name: Commit desired state
-              env:
-                  GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
               run: |
                   echo "=== BEFORE REMOTE ==="
                   git remote -v
