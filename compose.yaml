@@ -29,7 +29,7 @@ services:
     networks:
       - blog-app-net
   blog-server:
-    image: codersgyan/advance-ai-agent:build-484cc4c5d4c93b73f2fa1fd42514d3b55e33934b
+    image: codersgyan/advance-ai-agent:build-bb9a7035aace5273dda7a45d9c57000bb3574a7d
     deploy:
       replicas: 1
       update_config:
@@ -65,8 +65,7 @@ services:
 volumes:
   blog-db-vol: null
 networks:
-    blog-app-net: null
+  blog-app-net: null
 secrets:
-    my_db_password:
-        external: true
-
+  my_db_password:
+    external: true
