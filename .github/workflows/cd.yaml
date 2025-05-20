@@ -34,7 +34,15 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
               run: |
+                  echo "Before changing remote:"
                   git remote -v
+
+                  # 👇 Force Git to use GitHub App token for authentication
+                  git remote set-url origin https://x-access-token:${{ steps.generate_token.outputs.token }}@github.com/${{ github.repository }}
+
+                  echo "After changing remote:"
+                  git remote -v
+
                   git config user.name github-actions
                   git config user.email github-actions@github.com
                   git add .
