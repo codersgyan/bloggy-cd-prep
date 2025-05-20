@@ -55,7 +55,7 @@ services:
         environment:
             - DB_HOST=blog-db
             - DB_USER=root
-            - DB_PASSWORD=root
+            - DB_PASSWORD=/run/secrets/my_db_password
             - DB_NAME=blogdb
             - NODE_HOST="{{.Node.Hostname}}"
         networks:
