@@ -13,12 +13,6 @@ jobs:
             IMAGE_NAME: codersgyan/advance-ai-agent
             IMAGE_TAG: build-${{ github.sha }} # .run_number
         steps:
-            - name: Generate GitHub App Token
-              id: generate_token
-              uses: peter-murray/workflow-application-token-action@v4
-              with:
-                  application_id: ${{ secrets.APPLICATION_ID }}
-                  application_private_key: ${{ secrets.APPLICATION_PRIVATE_KEY }}
             - name: Checkout repository
               uses: actions/checkout@v3
               with:
@@ -30,6 +24,12 @@ jobs:
                   propertyPath: 'services["blog-server"].image'
                   value: ${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}}
                   commitChange: false
+            - name: Generate GitHub App Token
+              id: generate_token
+              uses: peter-murray/workflow-application-token-action@v4
+              with:
+                  application_id: ${{ secrets.APPLICATION_ID }}
+                  application_private_key: ${{ secrets.APPLICATION_PRIVATE_KEY }}
             - name: Commit desired state
               env:
                   GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
