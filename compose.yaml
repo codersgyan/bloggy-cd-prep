@@ -1,75 +1,74 @@
 services:
-    blog-db:
-        image: mysql
-        deploy:
-            replicas: 1
-            update_config:
-                order: start-first
-                failure_action: rollback
-                delay: 10s
-            rollback_config:
-                parallelism: 1
-                order: start-first
-        healthcheck:
-            test:
-                - CMD
-                - mysqladmin
-                - ping
-                - '-h'
-                - localhost
-            interval: 10s
-            timeout: 5s
-            retries: 3
-        environment:
-            - MYSQL_ROOT_PASSWORD=root
-        volumes:
-            - blog-db-vol:/var/lib/mysql
-        ports:
-            - '3306:3306'
-        networks:
-            - blog-app-net
-    blog-server:
-        image: codersgyan/advance-ai-agent:build-bb9a7035aace5273dda7a45d9c57000bb3574a7d
-        deploy:
-            replicas: 1
-            update_config:
-                order: start-first
-                failure_action: rollback
-                delay: 10s
-            rollback_config:
-                parallelism: 1
-                order: start-first
-        healthcheck:
-            test:
-                - CMD
-                - wget
-                - '--no-verbose'
-                - '--tries=1'
-                - '--spider'
-                - http://localhost:3000/health
-            interval: 10s
-            timeout: 5s
-            retries: 3
-        ports:
-            - '3001:3000'
-        environment:
-            - DB_HOST=blog-db
-            - DB_USER=/run/secrets/my_db_user
-            - DB_PASSWORD_FILE=/run/secrets/my_db_password
-            - DB_NAME=blogdb
-            - NODE_HOST="{{.Node.Hostname}}"
-        networks:
-            - blog-app-net
-        secrets:
-            - my_db_password
-            - my_db_user
+  blog-db:
+    image: mysql
+    deploy:
+      replicas: 1
+      update_config:
+        order: start-first
+        failure_action: rollback
+        delay: 10s
+      rollback_config:
+        parallelism: 1
+        order: start-first
+    healthcheck:
+      test:
+        - CMD
+        - mysqladmin
+        - ping
+        - '-h'
+        - localhost
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - blog-db-vol:/var/lib/mysql
+    ports:
+      - '3306:3306'
+    networks:
+      - blog-app-net
+  blog-server:
+    image: codersgyan/advance-ai-agent:build-416fa96a96b9d83e258cb3a2c4f8be888fb0aff4
+    deploy:
+      replicas: 1
+      update_config:
+        order: start-first
+        failure_action: rollback
+        delay: 10s
+      rollback_config:
+        parallelism: 1
+        order: start-first
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - '--no-verbose'
+        - '--tries=1'
+        - '--spider'
+        - http://localhost:3000/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    ports:
+      - '3001:3000'
+    environment:
+      - DB_HOST=blog-db
+      - DB_USER=/run/secrets/my_db_user
+      - DB_PASSWORD_FILE=/run/secrets/my_db_password
+      - DB_NAME=blogdb
+      - NODE_HOST="{{.Node.Hostname}}"
+    networks:
+      - blog-app-net
+    secrets:
+      - my_db_password
+      - my_db_user
 volumes:
   blog-db-vol: null
 networks:
   blog-app-net: null
 secrets:
-    my_db_password:
-        external: true
-    my_db_user:
-        external: true
-
+  my_db_password:
+    external: true
+  my_db_user:
+    external: true
