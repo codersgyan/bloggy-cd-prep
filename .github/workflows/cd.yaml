@@ -34,20 +34,20 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
               run: |
-                  echo "Before changing remote:"
+                  echo "=== BEFORE REMOTE ==="
                   git remote -v
 
-                  # 👇 Force Git to use GitHub App token for authentication
+                  # Force Git to use the GitHub App token
                   git remote set-url origin https://x-access-token:${{ steps.generate_token.outputs.token }}@github.com/${{ github.repository }}
 
-                  echo "After changing remote:"
+                  echo "=== AFTER REMOTE ==="
                   git remote -v
 
                   git config user.name github-actions
                   git config user.email github-actions@github.com
                   git add .
-                  git commit -m "docker image version bump to ${{env.IMAGE_TAG}} [skip ci]"
-                  git push
+                  git commit -m "docker image version bump to ${{ env.IMAGE_TAG }} [skip ci]"
+                  git push origin HEAD:main
             - name: Log in to Docker Hub
               uses: docker/login-action@v1
               with:
