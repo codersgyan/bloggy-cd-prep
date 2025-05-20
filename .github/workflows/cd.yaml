@@ -16,7 +16,7 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v3
               with:
-                  persist-credentials: true
+                  persist-credentials: false
             - name: Update compose.yml
               uses: fjogeleit/yaml-update-action@v0.16.0
               with:
@@ -37,6 +37,8 @@ jobs:
                   git commit -a -m "bump aAdd changes"
             - name: Push changes
               uses: ad-m/github-push-action@master
+              env:
+                  TOKEN: ${{ steps.generate_token.outputs.token }}
               with:
                   github_token: ${{ env.TOKEN }}
             - name: Log in to Docker Hub
