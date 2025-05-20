@@ -19,6 +19,8 @@ FROM node:20-slim AS runner
 
 WORKDIR /app
 
+RUN apt install update && apt install -y wget
+
 # Copy production dependencies and built app from builder
 COPY --from=builder /app/dist ./
 COPY --from=builder /app/node_modules ./node_modules
