@@ -54,7 +54,7 @@ services:
             - '3001:3000'
         environment:
             - DB_HOST=blog-db
-            - DB_USER=root
+            - DB_USER=/run/secrets/my_db_user
             - DB_PASSWORD_FILE=/run/secrets/my_db_password
             - DB_NAME=blogdb
             - NODE_HOST="{{.Node.Hostname}}"
@@ -62,10 +62,13 @@ services:
             - blog-app-net
         secrets:
             - my_db_password
+            - my_db_user
 volumes:
     blog-db-vol: null
 networks:
     blog-app-net: null
 secrets:
     my_db_password:
+        external: true
+    my_db_user:
         external: true
