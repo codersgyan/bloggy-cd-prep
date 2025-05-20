@@ -34,7 +34,7 @@ jobs:
               run: |
                   git config --local user.email "test@test.com"
                   git config --local user.name "Test"
-                  git commit -a -m "bump aAdd changes"
+                  git commit -a -m "bump aAdd changes [skip-ci]"
             - name: Push changes
               uses: ad-m/github-push-action@master
               env:
