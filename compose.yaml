@@ -60,7 +60,8 @@ services:
             - NODE_HOST="{{.Node.Hostname}}"
         networks:
             - blog-app-net
+
 volumes:
-    blog-db-vol: null
+  blog-db-vol: null
 networks:
-    blog-app-net: null
+  blog-app-net: null
