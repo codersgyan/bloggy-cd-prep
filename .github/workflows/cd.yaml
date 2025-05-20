@@ -34,8 +34,8 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
               run: |
-                  git config user.name github-actions
-                  git config user.email github-actions@github.com
+                  git config --local user.name github-actions
+                  git config --local user.email github-actions@github.com
                   git add .
                   git commit -m "docker image version bump to ${{env.IMAGE_TAG}} [skip ci]"
                   git push
