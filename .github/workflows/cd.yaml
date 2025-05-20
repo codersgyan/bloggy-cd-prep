@@ -30,6 +30,10 @@ jobs:
               with:
                   application_id: ${{ secrets.APPLICATION_ID }}
                   application_private_key: ${{ secrets.APPLICATION_PRIVATE_KEY }}
+            - name: Show token owner
+              run: |
+                  curl -s -H "Authorization: token ${{ steps.generate_token.outputs.token }}" \
+                      https://api.github.com/user
             - name: Commit desired state
               run: |
                   echo "=== BEFORE REMOTE ==="
