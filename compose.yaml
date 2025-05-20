@@ -65,4 +65,8 @@ services:
 volumes:
   blog-db-vol: null
 networks:
-  blog-app-net: null
+    blog-app-net: null
+secrets:
+    my_db_password:
+        external: true
+
