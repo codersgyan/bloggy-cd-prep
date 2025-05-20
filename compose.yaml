@@ -64,11 +64,12 @@ services:
             - my_db_password
             - my_db_user
 volumes:
-    blog-db-vol: null
+  blog-db-vol: null
 networks:
-    blog-app-net: null
+  blog-app-net: null
 secrets:
     my_db_password:
         external: true
     my_db_user:
         external: true
+
